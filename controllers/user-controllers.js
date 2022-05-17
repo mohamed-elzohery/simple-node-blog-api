@@ -1,16 +1,29 @@
 const User = require('../models/User');
 const {catchAsync, ErrorResponse} = require('@elzohery/tickets-common');
 
-
-const changeSuspendStatus = catchAsync( async (req, res, next) => {
+const getUserById =  catchAsync( async (req, res, next) => {
     const {id} = req.params;
     const user = await User.findById(id);
     if(!user){
-        throw new ErrorResponse(404, 'User not found', 'user');
+        next(new ErrorResponse(404, 'Comment not found', 'Comment'));
     }
-    console.log(user._id);
-    const updatedUser = await User.updateOne(user, {isSuspended: !user.isSuspended}, {runValidators: true});
-    res.status(200).json({success: true, message: 'user is updated successfully.', data: updatedUser})
+    req.user = user;
+    next();
+});
+
+const suspendUser = catchAsync( async (req, res, next) => {
+    const {user} = req;
+    console.log(user);
+    const updatedUser = await User.updateOne({_id: user._id}, {isSuspended: true});
+    res.status(200).json({success: true, message: 'user is suspended.', data: updatedUser})
+});
+
+const unsuspendUser = catchAsync( async (req, res, next) => {
+    const {user} = req;
+    const updatedUser = await User.updateOne({_id: user._id}, {isSuspended: false});
+    res.status(200).json({success: true, message: 'user is unsuspended.', data: updatedUser})
 })
 
-exports.changeSuspendStatus = changeSuspendStatus;
+exports.getUserById = getUserById;
+exports.suspendUser = suspendUser;
+exports.unsuspendUser = unsuspendUser;
