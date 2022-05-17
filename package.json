@@ -1,0 +1,19 @@
+{
+  "name": "blog-node",
+  "version": "1.0.0",
+  "description": "Simple blog api for ITI lab",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server"
+  },
+  "author": "Elzohery",
+  "license": "ISC",
+  "dependencies": {
+    "@elzohery/tickets-common": "^1.1.7",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.3",
+    "morgan": "^1.10.0",
+    "validator": "^13.7.0"
+  }
+}
