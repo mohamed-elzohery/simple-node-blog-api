@@ -4,10 +4,10 @@ const {errorHandler, ErrorResponse} = require('@elzohery/tickets-common');
 const UserRouter = require('./routes/v1/users-router');
 const ArticlesRouter = require('./routes/v1/articles-router');
 const CommentsRouter = require('./routes/v1/comments-router');
-const showHateoasJson = require('./docs/showHateoasJson');
+const showHateoas = require('./docs/showHateoas');
 
 //  Hateoas for user routes only
-app.get('/api/blog/v1', showHateoasJson);
+app.get('/api/blog/v1', showHateoas);
 
 app.use('/api/blog/v1/users', UserRouter);
 app.use('/api/blog/v1/articles', ArticlesRouter);
