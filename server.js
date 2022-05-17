@@ -16,6 +16,8 @@ app.use('*', () => {throw new ErrorResponse(404, 'Wrong Route', 'routes')});
 app.use(errorHandler);
 
 (async ()=>{
+    //  Mongo is connected locally if you don't have mongo on your machine
+    //  You can use any remote mongo service or npm i mongodb-memory-server
     await connect('mongodb://localhost:27017/blog');
     console.log('Connected to database');
     app.listen(5000, () => console.log('Server is running on port 5000'));
